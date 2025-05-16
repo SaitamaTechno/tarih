@@ -1,22 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OnemliKisiler_1500-1900.pdf</title>
-  <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+  
+  <style type="text/css">
+  body {
+    background-color: #535759;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20;
+  }
+
+  #canvases {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0px;
+    background-color: #333; /* makes canvas boundaries more visible */
+  }
+
+  #canvases canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 20px; /* space between pages */
+    border-radius: 4px;
+    background-color: #535759; /* make sure canvas background is visible */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* optional: shadow for separation */
+  }
+
+  .download-link {
+    margin: 20px auto;
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+
+  .download-link:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+
+
 </head>
 <body>
-  <iframe src="docs/OnemliKisiler_1500-1900.pdf"></iframe>
+
+  <a class="download-link" href="docs/OnemliKisiler_1500-1900.pdf" download>Download PDF</a>
+  <div id="canvases"></div>
+
+  <script type="text/javascript" src="./OnemliKisiler_1500-1900.js"></script>
 </body>
 </html>
