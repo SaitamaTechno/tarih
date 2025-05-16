@@ -9,33 +9,50 @@ var pdfDoc = null,
     pageNumPending = null,
     scale = 1.5;
 
-function renderPage(num, canvas) {
+function renderPage(num, canvas, container) {
   var ctx = canvas.getContext('2d');
   pageRendering = true;
-  // Using promise to fetch the page
+
   pdfDoc.getPage(num).then(function(page) {
-    var viewport = page.getViewport({scale: scale});
+    var viewport = page.getViewport({ scale: scale });
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
-    // Render PDF page into canvas context
+    // Render the canvas
     var renderContext = {
       canvasContext: ctx,
       viewport: viewport
     };
     var renderTask = page.render(renderContext);
 
-    // Wait for rendering to finish
+    // Create and append text layer div
+    const textLayerDiv = document.createElement('div');
+    textLayerDiv.className = 'textLayer';
+    textLayerDiv.style.width = canvas.style.width;
+    textLayerDiv.style.height = canvas.style.height;
+    container.appendChild(textLayerDiv);
+
+    // Render the text layer
+    page.getTextContent().then(function(textContent) {
+      pdfjsLib.renderTextLayer({
+        textContent: textContent,
+        container: textLayerDiv,
+        viewport: viewport,
+        textDivs: [],
+        enhanceTextSelection: true
+      });
+    });
+
     renderTask.promise.then(function() {
       pageRendering = false;
       if (pageNumPending !== null) {
-        // New page rendering is pending
         renderPage(pageNumPending);
         pageNumPending = null;
       }
     });
   });
 }
+
 
 pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
   pdfDoc = pdfDoc_;
