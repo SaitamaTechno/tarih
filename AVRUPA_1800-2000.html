@@ -1,35 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AVRUPA_1800-2000.pdf</title>
-  <style>
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      background: #222; color: white; padding: 10px; text-align: center;
-      flex-shrink: 0;
-    }
-    iframe {
-      flex-grow: 1;
-      width: 100%;
-      border: none;
-      min-height: 300px;
-    }
-  </style>
+  <title>Simple PDF Viewer</title>
+  
 </head>
 <body>
-  <header>
-    <h1>AVRUPA_1800-2000.pdf</h1>
-  </header>
-
-  <iframe src="docs/AVRUPA_1800-2000.pdf" sandbox="allow-same-origin allow-scripts"></iframe>
-
+  <div id="canvases"></div>
+	<script type="text/javascript" src="./script.js"></script>
+	<style type="text/css">
+		body {
+			background-color: #535759;
+		}
+		#canvases canvas {
+			margin: 20px auto;
+			display: block;
+		}
+	</style>
 </body>
 </html>
