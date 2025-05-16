@@ -14,22 +14,24 @@
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    padding: 40;
+    padding: 0;
   }
 
   #canvases {
     max-width: 800px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
+    background-color: #333; /* makes canvas boundaries more visible */
   }
 
   #canvases canvas {
     display: block;
     width: 100% !important;
     height: auto !important;
-    margin-bottom: 40px; /* Space between pages */
-    border-radius: 4px;   /* Optional: slight rounding for visual separation */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
+    margin-bottom: 30px; /* space between pages */
+    border-radius: 4px;
+    background-color: white; /* make sure canvas background is visible */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* optional: shadow for separation */
   }
 
   .download-link {
@@ -48,6 +50,7 @@
     background-color: #0056b3;
   }
 </style>
+
 
 
 </head>
