@@ -15,13 +15,39 @@
 		body {
 			background-color: #535759;
 		}
-		#canvases canvas {
-		  margin: 20px auto;
-		  display: block;
-		  width: 100% !important;
-		  height: auto !important;
-		  max-width: 100vw;
-		}
+		#canvases .page-container {
+		    position: relative;
+		    margin: 20px auto;
+		    width: 100%;
+		    max-width: 100vw;
+		  }
+		
+		  canvas {
+		    width: 100% !important;
+		    height: auto !important;
+		    display: block;
+		  }
+		
+		  .textLayer {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    color: transparent;
+		    transform-origin: 0 0;
+		    line-height: 1;
+		    user-select: text;
+		    pointer-events: none;
+		  }
+		
+		  .textLayer span {
+		    position: absolute;
+		    white-space: pre;
+		    transform-origin: 0 0;
+		    pointer-events: none;
+		    color: black;
+		  }
 
 	</style>
 </body>
