@@ -53,21 +53,24 @@ function renderPage(num, canvas, container) {
   });
 }
 
-
 pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
   pdfDoc = pdfDoc_;
 
   const pages = parseInt(pdfDoc.numPages);
 
-  var canvasHtml = '';
-  for (var i = 0; i < pages; i++) {
-  	canvasHtml += '<canvas id="canvas_' + i + '"></canvas>';
-  }
+  const canvasesContainer = document.getElementById('canvases');
+  canvasesContainer.innerHTML = '';
 
-  document.getElementById('canvases').innerHTML = canvasHtml;
+  for (let i = 0; i < pages; i++) {
+    const container = document.createElement('div');
+    container.className = 'page-container';
 
-  for (var i = 0; i < pages; i++) {
-  	var canvas = document.getElementById('canvas_' + i);
-  	renderPage(i+1, canvas);
+    const canvas = document.createElement('canvas');
+    canvas.id = 'canvas_' + i;
+
+    container.appendChild(canvas);
+    canvasesContainer.appendChild(container);
+
+    renderPage(i + 1, canvas, container);
   }
 });
