@@ -9,43 +9,27 @@ var pdfDoc = null,
     pageNumPending = null,
     scale = 1.5;
 
-function renderPage(num, canvas, container) {
+function renderPage(num, canvas) {
   var ctx = canvas.getContext('2d');
   pageRendering = true;
-
+  // Using promise to fetch the page
   pdfDoc.getPage(num).then(function(page) {
-    var viewport = page.getViewport({ scale: scale });
+    var viewport = page.getViewport({scale: scale});
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
-    // Render the canvas
+    // Render PDF page into canvas context
     var renderContext = {
       canvasContext: ctx,
       viewport: viewport
     };
     var renderTask = page.render(renderContext);
 
-    // Create and append text layer div
-    const textLayerDiv = document.createElement('div');
-    textLayerDiv.className = 'textLayer';
-    textLayerDiv.style.width = canvas.style.width;
-    textLayerDiv.style.height = canvas.style.height;
-    container.appendChild(textLayerDiv);
-
-    // Render the text layer
-    page.getTextContent().then(function(textContent) {
-      pdfjsLib.renderTextLayer({
-        textContent: textContent,
-        container: textLayerDiv,
-        viewport: viewport,
-        textDivs: [],
-        enhanceTextSelection: true
-      });
-    });
-
+    // Wait for rendering to finish
     renderTask.promise.then(function() {
       pageRendering = false;
       if (pageNumPending !== null) {
+        // New page rendering is pending
         renderPage(pageNumPending);
         pageNumPending = null;
       }
@@ -58,19 +42,15 @@ pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
 
   const pages = parseInt(pdfDoc.numPages);
 
-  const canvasesContainer = document.getElementById('canvases');
-  canvasesContainer.innerHTML = '';
+  var canvasHtml = '';
+  for (var i = 0; i < pages; i++) {
+  	canvasHtml += '<canvas id="canvas_' + i + '"></canvas>';
+  }
 
-  for (let i = 0; i < pages; i++) {
-    const container = document.createElement('div');
-    container.className = 'page-container';
+  document.getElementById('canvases').innerHTML = canvasHtml;
 
-    const canvas = document.createElement('canvas');
-    canvas.id = 'canvas_' + i;
-
-    container.appendChild(canvas);
-    canvasesContainer.appendChild(container);
-
-    renderPage(i + 1, canvas, container);
+  for (var i = 0; i < pages; i++) {
+  	var canvas = document.getElementById('canvas_' + i);
+  	renderPage(i+1, canvas);
   }
 });
