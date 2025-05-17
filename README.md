@@ -1,4 +1,4 @@
-# tarih
+# Tarih
 Tubitak Tarih Projesi<br>
 website: https://saitamatechno.github.io/tarih/<br>
 source:
