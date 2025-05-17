@@ -1,4 +1,4 @@
-# Tubitak Tarih Projesi
+# Tübitak Tarih Projesi
 
 <br>
 website: https://saitamatechno.github.io/tarih/<br>
